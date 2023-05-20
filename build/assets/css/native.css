@@ -1,0 +1,98 @@
+#root{
+    overflow-x: hidden;    
+}
+body {
+    overflow-x: hidden;
+    /*overflow: overlay;*/
+
+    /* REMOVE TAPPING HIGHLIGHT ON MOBILE */
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -khtml-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+}
+
+/* Chrome 29+ */
+@media screen and (-webkit-min-device-pixel-ratio:0) and (min-resolution:.001dpcm) {
+    body {
+        overflow: overlay;
+        overflow-x: hidden;
+    }
+}
+
+/* STYLE SCROLLBAR */
+body::-webkit-scrollbar {
+    width: 8px;
+    height: 10px;
+    /*background-color: rgba(0,0,0,0.0);;*/
+}
+
+body::-webkit-scrollbar-track {
+    border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background-color: #1B1A19;
+    width: 8px;
+}
+
+/* :focus { outline: 0;}*/
+
+/*Change autofill background color*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #f5e1be inset !important;
+}
+
+/*Change text in autofill textbox*/
+input:-webkit-autofill {
+    -webkit-text-fill-color: #0d0d0d !important;
+}
+
+/* ENABLE INTERACTION ON MATTER.JS CANVAS */
+.tricks-matter {
+    touch-action: auto !important;
+}
+
+/* DISABLE MATTER.JS TOUCH ON MOBILE */
+@media only screen and (max-width: 768px) {
+    .tricks-matter {
+        touch-action: none !important;
+    }
+
+    .s-left.distribute {
+        pointer-events: none;
+    }
+}
+
+
+/* STOP SCROLLING */
+.stop-scrolling {
+    height: 100% !important;
+    overflow: hidden !important;
+}
+
+/* LOADER COLOR STYLES */
+.l-blue {
+    background-color: #91C3CE;
+}
+
+.l-purple {
+    background-color: #C0A8E6;
+}
+
+.l-orange {
+    background-color: #F37925;
+}
+
+@media only screen and (max-width: 768px) {
+    .faq__tabs-menu {
+        overflow-x: scroll !important;
+    }
+}

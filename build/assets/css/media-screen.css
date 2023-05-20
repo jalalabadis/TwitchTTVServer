@@ -1,0 +1,69 @@
+/* Mobile frendly */
+@media screen and (max-width:991px) {
+.content-parts{
+    padding: 6vw 0;
+}
+.content-parts h1{
+    font-size: 30px;
+line-height: 40px;
+}
+}
+
+@media screen and (max-width:767px) {
+    .content-parts{
+        padding: 4vw 0;
+}
+.auther_postd_container{
+    padding: 25px 22px 25px 15px;
+  }
+  .post_bodys{
+    margin: 0px 0px 15px;
+  }
+}
+
+@media screen and (max-width:479px) {
+        .content-parts{
+            padding: 2vw 0;
+}
+.content-parts h1{
+    font-size: 25px;
+line-height: 30px;
+}
+.content-parts button{
+padding: 0.6rem;
+font-size: 14px;
+}
+
+.popup-content {
+    width: 90vw;
+
+}
+
+.popup-content h1{
+    font-weight: 200;
+    font-size: 20px;
+    line-height: 33px;
+}
+.popup-content p{
+margin: 5vh 0;
+}
+.handleValidate{
+    padding: 3vw 1vw;
+    font-weight: 200;
+font-size: 12px;
+line-height: 100%;
+}
+
+.validategiftsbutton button{
+width: 95%;
+}
+
+.card-name{
+    display: none;
+}
+
+.footertext{
+    font-size: 12px;
+}
+
+}

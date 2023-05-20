@@ -1,0 +1,114 @@
+/* Profile page */
+
+.profile-page {
+    min-height: calc(100vh - var(--menu-height));
+    background-size: cover;
+    margin: 0;
+    width: auto;
+    width: 100%;
+    margin-top: 50px;
+  }
+  .profile-page .container{
+    width: 100%;
+  }
+  
+  .profile-page .page-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+  }
+  
+  .profile-page .profile-container {
+    border-radius: var(--radius);
+    background: #fff;
+    padding-top: 2rem;
+    text-align: left;
+  }
+  
+  .profile-page .avatar-container figure {
+    position: relative;
+    border: 5px solid var(--color-icon);
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1rem;
+    overflow: hidden
+  }
+
+  .profile-page .avatar-container figure img{
+height: 100%;
+width: 100%;
+  }
+  .profile-details{
+    list-style: none;
+  }
+  .profile-page .profile-details {
+    border-radius: var(--radius)
+  }
+  
+  .profile-page .profile-details li {
+    border-bottom: 1px solid var(--color-divider);
+    padding: 1rem;
+    margin: 0
+  }
+ 
+  
+  .profile-page .profile-details .label {
+    margin: 0 1rem 0 0;
+    font-weight: 700
+  }
+  
+  .profile-page .profile-details .value {
+    word-wrap: break-word
+  }
+  
+  @media (min-width:415px) {
+    .profile-page .page-title {
+        max-width: 500px
+    }
+  
+    .profile-page .profile-container {
+        background: #fff;
+        padding: 2rem 2rem 1rem 2rem;
+        max-width: 500px
+    }
+  
+    .profile-page .profile-details li {
+        display: flex;
+        flex-direction: row;
+        padding: 1rem 0
+    }
+  
+    .profile-page .profile-details .label {
+        flex: 0 0 150px
+    }
+  
+    .profile-page .profile-details .value {
+        flex: 1 1 auto
+    }
+  }
+  
+  @media (min-width:769px) {
+    .profile-page .profil-container {
+        min-height: 50vh
+    }
+  }
+
+  .logoutbtn{
+    margin-left: 5px; background: #ffffff; border: 1px solid #e4d4d4;
+    text-align: right;
+}
+
+.yourfavbtn{
+    margin-top: 12px;
+    background: #E87A7A;
+    color: #ffffff;
+    border: none; 
+    padding: 10px;
+}
+.yourfavbtn svg{
+width: 30px;
+}
+.yourfavbtn:hover{
+    color: #fff;
+}

@@ -71,7 +71,7 @@ router.get('/', async (req, res) => {
         email: req.user.profile.email,
         Avatar: req.user.profile.profile_image_url
   }, process.env.JWT_SECRET, { expiresIn: '7d' });
-  res.redirect(process.env.EXPRESS_APP_CLIENT+'/login?token='+token);
+  res.redirect('/login?token='+token);
     }
   else{
   const newUser = new User(userData);
@@ -84,7 +84,7 @@ const token = jwt.sign({
     email: req.user.profile.email,
     Avatar: req.user.profile.profile_image_url
 }, process.env.JWT_SECRET, { expiresIn: '7d' });
-res.redirect(process.env.EXPRESS_APP_CLIENT+'/login?token='+token);
+res.redirect('/login?token='+token);
   //res.status(200).json(userData);
 })
 .catch(err=> res.status(500).send('Authorization failed!'));
