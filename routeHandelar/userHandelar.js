@@ -21,7 +21,7 @@ router.use(session({
   router.use(passport.session());
 
   router.get('/auth/twitch', (req, res, next)=>{
-    console.log(process.env.TWITCH_CLIENT_ID+`${req.protocol}://${req.get('host')}`)
+    console.log(process.env.TWITCH_CLIENT_ID+process.env.TWITCH_CLIENT_SECRET+`${req.protocol}://${req.get('host')}`)
     passport.use(new TwitchStrategy({
       clientID: process.env.TWITCH_CLIENT_ID,
       clientSecret: process.env.TWITCH_CLIENT_SECRET,
