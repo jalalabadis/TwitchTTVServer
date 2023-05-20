@@ -25,7 +25,7 @@ router.use(session({
     passport.use(new TwitchStrategy({
       clientID: process.env.TWITCH_CLIENT_ID,
       clientSecret: process.env.TWITCH_CLIENT_SECRET,
-      callbackURL: `${req.protocol}://${req.get('host')}/user/auth/twitch/callback`,
+      callbackURL: `https://${req.get('host')}/user/auth/twitch/callback`,
       scope: "user_read"
     }, function(accessToken, refreshToken, profile, done) {
       // Here, you can perform any necessary database operations to store the user's information
