@@ -12,7 +12,7 @@ const Streamer = mongoose.model("streamer", streamerSchema);
 router.post('/user-info', authCheck, async (req, res)=>{
   try {
     const username = req.body.username;
-    const clientId = 'vnx6pr88umizlv8sdbogcqv9y6g4kv';
+    const clientId = process.env.TWITCH_CLIENT_ID;
     const accessToken = req.accessToken;
 
     const response = await axios.get(`https://api.twitch.tv/helix/users?login=${username}`, {

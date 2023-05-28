@@ -5,7 +5,7 @@ const authCheck = require('../middlewares/authCheck');
 
 // Streamer info
 router.post('/', authCheck, async (req, res) => {
-  const clientId = 'vnx6pr88umizlv8sdbogcqv9y6g4kv';
+  const clientId = process.env.TWITCH_CLIENT_ID;
   const accessToken = req.accessToken;
 
   try {
