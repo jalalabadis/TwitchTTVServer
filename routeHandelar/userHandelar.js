@@ -25,7 +25,7 @@ router.use(session({
     passport.use(new TwitchStrategy({
       clientID: process.env.TWITCH_CLIENT_ID,
       clientSecret: process.env.TWITCH_CLIENT_SECRET,
-      callbackURL: `https://${req.get('host')}/user/auth/twitch/callback`,
+      callbackURL: `http://${req.get('host')}/user/auth/twitch/callback`,
       scope: "user_read"
     }, function(accessToken, refreshToken, profile, done) {
       // Here, you can perform any necessary database operations to store the user's information
@@ -46,7 +46,7 @@ passport.deserializeUser(function(obj, done) {
 
 router.get('/auth/twitch/callback', passport.authenticate('twitch', { failureRedirect: '/login' }), function(req, res) {
   // Authentication successful, redirect to desired page
-  res.redirect('/user');
+  res.redirect(`/user`);
 });
 
 router.get('/', async (req, res) => {
@@ -72,7 +72,7 @@ router.get('/', async (req, res) => {
         email: req.user.profile.email,
         Avatar: req.user.profile.profile_image_url
   }, process.env.JWT_SECRET, { expiresIn: '7d' });
-  res.redirect('/login?token='+token);
+  res.redirect(`${process.env.EXPRESS_APP_CLIENT}/login?token=${token}`);
     }
   else{
   const newUser = new User(userData);
@@ -85,7 +85,7 @@ const token = jwt.sign({
     email: req.user.profile.email,
     Avatar: req.user.profile.profile_image_url
 }, process.env.JWT_SECRET, { expiresIn: '7d' });
-res.redirect('/login?token='+token);
+res.redirect(`${process.env.EXPRESS_APP_CLIENT}/login?token=${token}`);
   //res.status(200).json(userData);
 })
 .catch(err=> res.status(500).send('Authorization failed!'));
@@ -93,7 +93,7 @@ res.redirect('/login?token='+token);
 
 }
 catch{
-res.redirect('/');  
+res.redirect(`${process.env.EXPRESS_APP_CLIENT}`);  
 }
 });
 

@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const axios = require('axios');
 const mongoose = require('mongoose');
 const authCheck = require('../middlewares/authCheck');
 const Automation = require('../middlewares/Automation');
@@ -28,6 +27,7 @@ router.post('/', Automation, authCheck, async (req, res)=>{
         }
         else{
        await new AutomationData({
+        Automation: true,
         display_name: req.body.channel,
         followerCount: req.body.followerCount,
         id: req.body.StemarID,
@@ -54,7 +54,7 @@ router.post('/', Automation, authCheck, async (req, res)=>{
   });
   
 
-  ///User Subscription data
+  ///User Subscription (Automation) data
 router.post('/user-subscription', authCheck, async (req, res)=>{
   const AutomationDatas = await AutomationData.find({Subscription: req.userID});
   if(AutomationDatas){
@@ -64,5 +64,16 @@ router.post('/user-subscription', authCheck, async (req, res)=>{
       res.status(404).send('No data found');
   }
 });
+
+  ///All  subscription (Automation)  data
+  router.post('/all-subscription', authCheck, async (req, res)=>{
+    const AutomationDatas = await AutomationData.find().populate('Subscription');
+    if(AutomationDatas){
+        res.status(200).send(AutomationDatas);
+    }
+    else{
+        res.status(404).send('No data found');
+    }
+  });
 
 module.exports = router;

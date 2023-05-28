@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 const automationSchema = new mongoose.Schema({
-
+    Automation: {
+        type: Boolean,
+        required: true
+    },
     display_name: {
         type: String,
         required: true

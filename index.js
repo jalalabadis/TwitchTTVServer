@@ -6,6 +6,8 @@ var cors = require('cors');
 const userHandelar = require('./routeHandelar/userHandelar');
 const streamerHandelar = require('./routeHandelar/streamerHandelar');
 const subscribeHandelar = require('./routeHandelar/subscribeHandelar');
+const unsubscribeHandelar = require('./routeHandelar/unsubscribeHandelar');
+const searchHandelar = require('./routeHandelar/searchHandelar');
 
   
 //App initialization
@@ -26,6 +28,8 @@ mongoose.connect(process.env.EXPRESS_APP_DATABASE)
 app.use('/user', userHandelar);
 app.use('/streamer', streamerHandelar);
 app.use('/subscribe', subscribeHandelar);
+app.use('/unsubscribe', unsubscribeHandelar);
+app.use('/search', searchHandelar);
 app.get('*', (req, res) => {res.sendFile(path.join(__dirname, 'build', 'index.html'));});
 
 ////listen server

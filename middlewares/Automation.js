@@ -9,11 +9,14 @@ const Automation = (req, res, next) => {
   const accessToken = req.accessToken;
 
   try {
-    axios.post(`https://api.twitch.tv/helix/subscriptions?broadcaster_id=${channelID}&tier=1000`, {}, {
+    axios.post(`https://api.twitch.tv/helix/subscriptions`, {
+      broadcaster_id: channelID,
+      tier: '1000',
+    }, {
       headers: {
-        'Authorization': `Bearer ${accessToken}`,
         'Client-ID': ClintID,
-      }
+        'Authorization': `Bearer ${accessToken}`,
+      },
     })
     .then(result=>{
       req.status = true;
