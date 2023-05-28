@@ -20,7 +20,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 ///DataBase Connect
 mongoose.connect(process.env.EXPRESS_APP_DATABASE)
-.then(()=> console.log('Databse connect successful'))
+.then(()=> console.log('Databse connect successfuly'))
 .catch(err => console.log(err));
 
 
