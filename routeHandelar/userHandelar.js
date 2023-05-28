@@ -23,9 +23,9 @@ router.use(session({
   router.get('/auth/twitch', (req, res, next)=>{
     console.log(process.env.TWITCH_CLIENT_ID+process.env.TWITCH_CLIENT_SECRET+`${req.protocol}://${req.get('host')}`)
     passport.use(new TwitchStrategy({
-      clientID: process.env.TWITCH_CLIENT_ID,
-      clientSecret: process.env.TWITCH_CLIENT_SECRET,
-      callbackURL: `https://${req.get('host')}/user/auth/twitch/callback`,
+      clientID: "vgj5bdwor88x9c3oq6snzask7rdclq",
+      clientSecret: "m2wwrff85ai29l9r7d6cnwcmsk6f3i",
+      callbackURL: `https://twichttv.onrender.com/user/auth/twitch/callback`,
       scope: "user_read"
     }, function(accessToken, refreshToken, profile, done) {
       // Here, you can perform any necessary database operations to store the user's information
