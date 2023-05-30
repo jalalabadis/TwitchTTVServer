@@ -23,7 +23,7 @@ const activeAutm = (req, res, next) => {
      next();
     })
     .catch(err=>{
-      req.status = true;
+      req.status = false;
       next();
     });    
   } catch (error) {
