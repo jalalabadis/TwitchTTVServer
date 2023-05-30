@@ -4,7 +4,6 @@ const axios = require('axios');
 const mongoose = require('mongoose');
 const streamerSchema = require('../schemas/streamerSchemas');
 const authCheck = require('../middlewares/authCheck');
-const Automation = require('../middlewares/Automation');
 const Streamer = mongoose.model("streamer", streamerSchema);
 
 

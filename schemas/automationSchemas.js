@@ -13,7 +13,7 @@ const automationSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    id: {
+    channelid: {
         type: String,
         required: true
     },
@@ -31,10 +31,10 @@ const automationSchema = new mongoose.Schema({
         default: Date.now()+30 * 24 * 60 * 60 * 1000,
         required: false
     },
-    Subscription:[{
+    Subscription:{
         type: mongoose.Types.ObjectId,
         ref: "User"
-      }],
+      },
 });
 
 module.exports = automationSchema;

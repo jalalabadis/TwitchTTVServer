@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const authCheck = require('../middlewares/authCheck');
-const Automation = require('../middlewares/Automation');
+const activeAutm = require('../middlewares/activeAutm');
 const streamerSchema = require('../schemas/streamerSchemas');
 const Streamer = mongoose.model("streamer", streamerSchema);
 const automationSchema = require('../schemas/automationSchemas');
@@ -10,7 +10,7 @@ const AutomationData = mongoose.model("Automation", automationSchema);
 
 
 ///Validate Add (subscribe)
-router.post('/', Automation, authCheck, async (req, res)=>{
+router.post('/', activeAutm, authCheck, async (req, res)=>{
     try{
       if(req.status){
         await Streamer.updateOne({id: req.body.StemarID}, {
@@ -30,7 +30,7 @@ router.post('/', Automation, authCheck, async (req, res)=>{
         Automation: true,
         display_name: req.body.channel,
         followerCount: req.body.followerCount,
-        id: req.body.StemarID,
+        channelid: req.body.StemarID,
         profile_image_url: req.body.profile_image_url,
         Subscription: req.userID
        }).save()

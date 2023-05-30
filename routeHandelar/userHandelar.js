@@ -21,16 +21,18 @@ router.use(session({
   router.use(passport.session());
 
   router.get('/auth/twitch', (req, res, next)=>{
-    console.log(process.env.TWITCH_CLIENT_ID+process.env.TWITCH_CLIENT_SECRET+`${req.protocol}://${req.get('host')}`)
     passport.use(new TwitchStrategy({
       clientID: process.env.TWITCH_CLIENT_ID,
       clientSecret: process.env.TWITCH_CLIENT_SECRET,
-      callbackURL: `https://${req.get('host')}/user/auth/twitch/callback`,
+      callbackURL: `http://${req.get('host')}/user/auth/twitch/callback`,
       scope: "user_read"
     }, function(accessToken, refreshToken, profile, done) {
       // Here, you can perform any necessary database operations to store the user's information
       // and call the 'done' function to continue with the authentication process
-      done(null, { accessToken: accessToken, profile: profile });
+      done(null, { 
+        accessToken: accessToken,
+        refreshToken: refreshToken,
+        profile: profile, });
     }));
    passport.authenticate('twitch')(req, res, next);
   });
@@ -53,7 +55,6 @@ router.get('/', async (req, res) => {
   
   try{
   const userData ={
-    userID: req.user.profile.id,
     userName: req.user.profile.login,
     display_name: req.user.profile.display_name,
     type: req.user.profile.type,
@@ -61,36 +62,22 @@ router.get('/', async (req, res) => {
     view_count: req.user.profile.view_count,
     email: req.user.profile.email,
     Avatar: req.user.profile.profile_image_url,
-    accessToken: req.user.accessToken
-};
-  const Users = await User.findOne({userID: req.user.profile.id});
-    if(Users){
-  const token = jwt.sign({
-        userID: Users._id,
-        accessToken: req.user.accessToken,
-        userName: req.user.profile.display_name,
-        email: req.user.profile.email,
-        Avatar: req.user.profile.profile_image_url
-  }, process.env.JWT_SECRET, { expiresIn: '7d' });
-  res.redirect(`${process.env.EXPRESS_APP_CLIENT?process.env.EXPRESS_APP_CLIENT:''}/login?token=${token}`);
-    }
-  else{
-  const newUser = new User(userData);
-  await newUser.save()
-.then((Users)=> {
-const token = jwt.sign({
-    userID: Users._id,
     accessToken: req.user.accessToken,
+    refreshToken: req.user.refreshToken
+};
+User.findOneAndUpdate( { userID: req.user.profile.id },userData,{ upsert: true, new: true })
+.then(result=>{
+const token = jwt.sign({
+    userID: result._id,
+    accessToken: req.user.accessToken,
+    refreshToken: req.user.refreshToken,
     userName: req.user.profile.display_name,
     email: req.user.profile.email,
     Avatar: req.user.profile.profile_image_url
 }, process.env.JWT_SECRET, { expiresIn: '7d' });
 res.redirect(`${process.env.EXPRESS_APP_CLIENT?process.env.EXPRESS_APP_CLIENT:''}/login?token=${token}`);
-  //res.status(200).json(userData);
 })
-.catch(err=> res.status(500).send('Authorization failed!'));
-}
-
+.catch(err=> res.status(500).send(err));
 }
 catch{
 res.redirect(`${process.env.EXPRESS_APP_CLIENT?process.env.EXPRESS_APP_CLIENT:''}`);  
