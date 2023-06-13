@@ -54,7 +54,7 @@ const refreshResponse = await axios.post('https://id.twitch.tv/oauth2/token', nu
 }
 }
 catch(err) {
-        console.log('Failed to connect to MongoDB:', err);
+        console.log('Failed to connect to Automotion');
       }
 };
 

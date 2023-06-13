@@ -4,7 +4,7 @@ const axios = require('axios');
 const authCheck = async (req, res, next) => {
   try {
     const decoded = jwt.verify(req.body.token, process.env.JWT_SECRET);
-    const { userID, accessToken, refreshToken, userName, email, Avatar } = decoded;
+    const { userID, twitchID, refreshToken, userName, email, Avatar } = decoded;
 
     // Make a request to Twitch API to refresh the access token
     const refreshResponse = await axios.post('https://id.twitch.tv/oauth2/token', null, {
@@ -19,6 +19,7 @@ const authCheck = async (req, res, next) => {
     const newAccessToken = refreshResponse.data.access_token;
 
     req.userID = userID;
+    req.twitchID = twitchID;
     req.accessToken = newAccessToken;
     req.userName = userName;
     req.email = email;
