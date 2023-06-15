@@ -36,14 +36,14 @@ router.post('/user-info', authCheck, async (req, res)=>{
 
     if (streamer) {
       await Streamer.updateOne({ id: user.id }, { $inc: { SearchCount: 1 } }).exec();
+      res.send(streamer);
      
     } else {
   user.SearchCount = 0;
   const newStreamer = new Streamer(user);
   await newStreamer.save();
+  res.send(newStreamer);
     }
-
-    res.send(user);
 
   } catch (err) {
     res.status(500).send('Error fetching data');

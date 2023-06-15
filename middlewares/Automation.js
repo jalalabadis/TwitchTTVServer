@@ -27,34 +27,53 @@ const refreshResponse = await axios.post('https://id.twitch.tv/oauth2/token', nu
         },
       });
 
-/////Subscribe Strmear
-   axios.post(`https://api.twitch.tv/helix/subscriptions`, {
-      broadcaster_id:automation.channelid,
-      tier: '1000',
-    }, {
-      headers: {
-        'Client-ID': process.env.TWITCH_CLIENT_ID,
-        'Authorization': `Bearer ${refreshResponse.data.access_token}`,
-      },
-    })
-    .then(async result=>{
-        automation.Automation = true;
-        automation.ExDate = Date.now()+30 * 24 * 60 * 60 * 1000;
-        // Save the updated automation
-        await automation.save();
-    })
-    .catch(async err=>{
-        automation.Automation = false;
-        // Save the updated automation
-        await automation.save();
-    });    
+// /////Subscribe Strmear
+//    axios.post(`https://api.twitch.tv/helix/subscriptions`, {
+//       broadcaster_id:automation.channelid,
+//       tier: '1000',
+//     }, {
+//       headers: {
+//         'Client-ID': process.env.TWITCH_CLIENT_ID,
+//         'Authorization': `Bearer ${refreshResponse.data.access_token}`,
+//       },
+//     })
+//     .then(async result=>{
+//         automation.Automation = true;
+//         automation.ExDate = Date.now()+30 * 24 * 60 * 60 * 1000;
+//         // Save the updated automation
+//         await automation.save();
+//     })
+//     .catch(async err=>{
+//         automation.Automation = false;
+//         // Save the updated automation
+//         await automation.save();
+//     }); 
+    
+
+axios.get('https://api.twitch.tv/helix/subscriptions/user', {
+  params: {
+    broadcaster_id: automation.channelid,
+    user_id: user.userID
+  },
+  headers: {
+    'Authorization': `Bearer ${refreshResponse.data.access_token}`,
+    'Client-ID': process.env.TWITCH_CLIENT_ID,
+  }
+})
+.then(response => {
+ console.log(response.data)
+})
+.catch(error => {
+  console.log("Not sub")
+});
+    
     console.log(refreshResponse.data.access_token)
     console.log(automation.channelid)
 
 }
 }
 catch(err) {
-        console.log('Failed to connect to Automotion');
+        console.log(err);
       }
 };
 
